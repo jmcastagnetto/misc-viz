@@ -21,7 +21,7 @@ peru <- read_csv("data/covid-19-peru-data-augmented.csv.xz") %>%
     deaths = replace_na(deaths, 0),
     recovered = replace_na(recovered, 0),
     epiweek = lubridate::epiweek(date),
-    wed_of_wk =lubridate::floor_date(date, unit = "week") + 3 # Wed of each week
+    wed_of_wk = lubridate::floor_date(date, unit = "week") + 3 # Wed of each week
   ) %>%
   group_by(epiweek, wed_of_wk) %>%
   summarise(
@@ -78,7 +78,6 @@ p1 <- ggplot(
     size = 6,
     color = "yellow"
   ) +
-
   scale_y_continuous(labels = scales::comma) +
   scale_x_date(
     date_breaks = "8 weeks",
