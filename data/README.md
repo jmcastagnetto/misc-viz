@@ -11,3 +11,11 @@
 - File: `pm_covid19_ins_peru.rds`
   - Source: <https://github.com/jmcastagnetto/pruebas_moleculares_peru_covid19_ins>
   - Commit [`f64b6efa3706708975ce9ca264730394c808c366`](https://github.com/jmcastagnetto/pruebas_moleculares_peru_covid19_ins/commit/f64b6efa3706708975ce9ca264730394c808c366)
+
+- File: `00.-Nacional-Matriz-Indicadores-Ceplan-Perú-2007-2019_Jun2020.xlsx`
+  - Source: <https://www.ceplan.gob.pe/informacion-sobre-zonas-y-departamentos-del-peru/>
+  - Downloaded on 2020-06-15
+
+- File: `Poblacion Peru 2020 Dpto Prov Dist Final INEI-actualizado.xlsx`
+  - Source: <https://www.minsa.gob.pe/reunis/data/poblacion_estimada.asp>
+  - Downloaded on 2020-11-17
