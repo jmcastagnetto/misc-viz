@@ -1,0 +1,77 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	//
+Miscellaneous visualizations	README.md	/^# Miscellaneous visualizations$/;"	c
+cases_epiweek	20201117-comparison-moleculartests_positives.R	/^cases_epiweek <- casos %>%$/;"	g
+comb_caption	20201116-indicators-covid19-peru.R	/^comb_caption <-  "CFR definition from: https:\/\/www.who.int\/news-room\/commentaries\/detail\/e/;"	g
+combined	20201117-comparison-moleculartests_positives.R	/^combined <- pm_epiweek %>%$/;"	g
+d	20201122-moltests-hdi-distribution.R	/^d <- density(hdi$idh2019)$/;"	g
+deaths_epiweek	20201117-comparison-moleculartests_positives.R	/^deaths_epiweek <- fallecimientos %>%$/;"	g
+dt_eq	20201116-indicators-covid19-peru.R	/^dt_eq <- "$CFR = \\\\left( \\\\frac{Deaths}{Deaths + Recovered} \\\\right)$"$/;"	g
+end_lkdn	20201116-indicators-covid19-peru.R	/^end_lkdn <- lubridate::ymd("2020-06-30")$/;"	g
+end_lkdn	20201117-comparison-moleculartests_positives.R	/^end_lkdn <- lubridate::ymd("2020-06-30")$/;"	g
+first_week	20201116-indicators-covid19-peru.R	/^first_week <- 14$/;"	g
+ggpirate	20201122-moltests-hdi-distribution.R	/^library(ggpirate)$/;"	l
+ggpmisc	20201121-moltest-coverage.R	/^library(ggpmisc)$/;"	l
+ggtext	20201117-comparison-moleculartests_positives.R	/^library(ggtext)$/;"	l
+hdi	20201122-moltests-hdi-distribution.R	/^hdi <- readxl::read_excel($/;"	g
+hdi_df	20201122-moltests-hdi-distribution.R	/^hdi_df <- hdi %>%$/;"	g
+ini_lkdn	20201116-indicators-covid19-peru.R	/^ini_lkdn <- lubridate::ymd("2020-03-16")$/;"	g
+ini_lkdn	20201117-comparison-moleculartests_positives.R	/^ini_lkdn <- lubridate::ymd("2020-03-16")$/;"	g
+ins_url	20201121-moltest-coverage.R	/^ins_url <- "https:\/\/datos.ins.gob.pe\/organization\/covid-19"$/;"	g
+ins_url	20201122-moltests-hdi-distribution.R	/^ins_url <- "https:\/\/datos.ins.gob.pe\/organization\/covid-19"$/;"	g
+last_week	20201116-indicators-covid19-peru.R	/^last_week <- max(peru$epiweek)$/;"	g
+latex2exp	20201116-indicators-covid19-peru.R	/^library(latex2exp)$/;"	l
+map_accum	20201121-moltest-coverage.R	/^map_accum <- pe %>%$/;"	g
+max1	20201122-moltests-hdi-distribution.R	/^max1 <- d$x[mode1]$/;"	g
+max2	20201122-moltests-hdi-distribution.R	/^max2 <- d$x[mode2]$/;"	g
+max_date	20201121-moltest-coverage.R	/^max_date <- max(pm$fechatomamuestra, na.rm = TRUE)$/;"	g
+max_date	20201122-moltests-hdi-distribution.R	/^max_date <- max(pm$fechatomamuestra, na.rm = TRUE)$/;"	g
+max_wk	20201121-render-weekly-moltest-coverage-accum.R	/^max_wk <- max(pm_epiweek$epiweek, na.rm = TRUE)$/;"	g
+min_date	20201121-moltest-coverage.R	/^min_date <- min(pm$fechatomamuestra, na.rm = TRUE)$/;"	g
+min_date	20201122-moltests-hdi-distribution.R	/^min_date <- min(pm$fechatomamuestra, na.rm = TRUE)$/;"	g
+min_wk	20201121-render-weekly-moltest-coverage-accum.R	/^min_wk <- min(pm_epiweek$epiweek, na.rm = TRUE)$/;"	g
+mode1	20201122-moltests-hdi-distribution.R	/^mode1 <- runs$lengths[1] + 1$/;"	g
+mode2	20201122-moltests-hdi-distribution.R	/^mode2 <- length(d$x) - runs$lengths[4]$/;"	g
+p0	20201122-moltests-hdi-distribution.R	/^p0 <- ggplot($/;"	g
+p1	20201116-indicators-covid19-peru.R	/^p1 <- ggplot($/;"	g
+p1	20201117-comparison-moleculartests_positives.R	/^p1 <- p_base +$/;"	g
+p1	20201121-moltest-coverage.R	/^p1 <- ggplot(map_accum) +$/;"	g
+p1	20201122-moltests-hdi-distribution.R	/^p1 <- ggplot($/;"	g
+p12	20201116-indicators-covid19-peru.R	/^p12 <- p1 + p2 +$/;"	g
+p2	20201116-indicators-covid19-peru.R	/^p2 <- ggplot($/;"	g
+p2	20201117-comparison-moleculartests_positives.R	/^p2 <- p_base +$/;"	g
+p2	20201122-moltests-hdi-distribution.R	/^p2 <- ggplot($/;"	g
+p_base	20201117-comparison-moleculartests_positives.R	/^p_base <- ggplot($/;"	g
+patchwork	20201116-indicators-covid19-peru.R	/^library(patchwork)$/;"	l
+pe	20201121-moltest-coverage.R	/^pe <- readRDS("data\/mapa_pe_prov.rds") %>%$/;"	g
+pe	20201121-render-weekly-moltest-coverage-accum.R	/^pe <- readRDS("data\/mapa_pe_prov.rds") %>%$/;"	g
+peru	20201116-indicators-covid19-peru.R	/^peru <- read_csv("data\/covid-19-peru-data-augmented.csv.xz") %>%$/;"	g
+peru_epiweek1	20201116-indicators-covid19-peru.R	/^peru_epiweek1 <- peru %>%$/;"	g
+peru_epiweek2	20201116-indicators-covid19-peru.R	/^peru_epiweek2 <- peru %>%$/;"	g
+plot_caption	20201117-comparison-moleculartests_positives.R	/^$/;"	g
+pm	20201117-comparison-moleculartests_positives.R	/^pm <- readRDS("data\/pm_covid19_ins_peru.rds")$/;"	g
+pm	20201121-moltest-coverage.R	/^pm <- readRDS("data\/pm_covid19_ins_peru.rds")$/;"	g
+pm	20201121-render-weekly-moltest-coverage-accum.R	/^pm <- readRDS("data\/pm_covid19_ins_peru.rds")$/;"	g
+pm	20201122-moltests-hdi-distribution.R	/^pm <- readRDS("data\/pm_covid19_ins_peru.rds")$/;"	g
+pm_accum	20201121-moltest-coverage.R	/^pm_accum <- pm %>%$/;"	g
+pm_augmented	20201122-moltests-hdi-distribution.R	/^pm_augmented <- pm %>%$/;"	g
+pm_epiweek	20201117-comparison-moleculartests_positives.R	/^pm_epiweek <- pm %>%$/;"	g
+pm_epiweek	20201121-render-weekly-moltest-coverage-accum.R	/^pm_epiweek <- pm %>%$/;"	g
+ptmp	20201121-render-weekly-moltest-coverage-accum.R	/^  ptmp <- ggplot(tmp) +$/;"	v
+rnaturalearth	20201121-moltest-coverage.R	/^library(rnaturalearth)$/;"	l
+rnaturalearth	20201121-render-weekly-moltest-coverage-accum.R	/^library(rnaturalearth)$/;"	l
+runs	20201122-moltests-hdi-distribution.R	/^runs <- rle(sign(diff(d$y)))$/;"	g
+sub1	20201117-comparison-moleculartests_positives.R	/^sub1 <- paste0("Using open data on <span style='color:blue;'>Deaths<\/span>, <span style='color:/;"	g
+sub2	20201117-comparison-moleculartests_positives.R	/^sub2 <- paste0("Using open data on <span style='color:blue;'>Deaths<\/span>, <span style='color:/;"	g
+tbl	20201121-moltest-coverage.R	/^tbl <- pm_accum %>%$/;"	g
+tidyverse	20201116-indicators-covid19-peru.R	/^library(tidyverse)$/;"	l
+tidyverse	20201117-comparison-moleculartests_positives.R	/^library(tidyverse)$/;"	l
+tidyverse	20201121-moltest-coverage.R	/^library(tidyverse)$/;"	l
+tidyverse	20201121-render-weekly-moltest-coverage-accum.R	/^library(tidyverse)$/;"	l
+tidyverse	20201122-moltests-hdi-distribution.R	/^library(tidyverse)$/;"	l
+tmp	20201121-render-weekly-moltest-coverage-accum.R	/^  tmp <- pe %>%$/;"	v
