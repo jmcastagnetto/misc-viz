@@ -152,8 +152,7 @@ americas <- prepare_df(
   df %>% filter(continent == "Americas")
 )
 bp_americas <- mk_bumpchart(americas, "The Americas")
-bp_americas
-
+#bp_americas
 ggsave(
   bp_americas,
   filename = glue::glue("plots/{Sys.Date()}-americas-top10-ranking-countries-covid19.png"),
@@ -211,7 +210,7 @@ oceania <- prepare_df(
   df %>% filter(continent == "Oceania")
 )
 bp_oceania <- mk_bumpchart(oceania, "Oceania")
-bp_oceania
+#bp_oceania
 ggsave(
   bp_oceania,
   filename = glue::glue("plots/{Sys.Date()}-oceania-ranking-countries-covid19.png"),
