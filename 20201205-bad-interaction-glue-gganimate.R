@@ -1,3 +1,5 @@
+# Ref:  https://github.com/thomasp85/gganimate/issues/422
+
 library(tidyverse)
 library(gganimate)
 library(palmerpenguins)
