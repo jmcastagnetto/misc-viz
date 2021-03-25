@@ -113,7 +113,7 @@ psam <- ggplot(
     y = "",
     title = "Evolución del R efectivo estimado (COVID-19) en Sudamérica",
     subtitle = glue::glue("Del 2021-01-01 al {max_date} (Ref: https://doi.org/10.1371/journal.pone.0244474)"),
-    caption = glue::glue("Fuente original de datos: https://github.com/crondonm/TrackingR/tree/main/Estimates-Database\n@jmcastagnetto, Jesus M. Castagnetto ({today})")
+    caption = glue::glue("Fuente original de datos: https://github.com/crondonm/TrackingR/tree/main/Estimates-Database\nCódigo: https://github.com/jmcastagnetto/misc-viz/tree/main/estimated-r-pone-0244474 // @jmcastagnetto, Jesus M. Castagnetto ({today})")
   )
 
 ggsave(
