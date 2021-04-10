@@ -58,8 +58,8 @@ income_group_lbls <- vaccinations_country_latest %>%
   )
 
 txt_note <- data.frame(
-  y = 4.8,
-  x = 26,
+  y = 4.5,
+  x = 30,
   txt = "To date, the **COVID-19** vaccination gap between countries is noticeable.<br/><br/>The richest countries have been able to vaccinate a bigger fraction of their populations.<br/><br/>The poorest are behind by a lot, and not catching up soon.<br/><br/>This reflects the wholesale purchase of the available and future vaccine stock by richer countries."
 )
 
@@ -95,7 +95,7 @@ p1 <- ggplot(
     width = .6,
     box.size = 0,
     size = 9,
-    fill = rgb(1, 1, 1, .7)
+    fill = rgb(1, 1, 1, .5)
   ) +
   scale_fill_brewer(
     palette = "YlOrRd",
@@ -127,7 +127,7 @@ p1 <- ggplot(
 ggsave(
   plot = p1,
   filename = "covid19-vaccines/asymmetric-vaccine-extent-covid19-owid.png",
-  width = 18,
+  width = 20,
   height = 12
 )
 
