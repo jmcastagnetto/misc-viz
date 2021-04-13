@@ -1,0 +1,52 @@
+var rutaLs = window.location.href;
+
+if (rutaLs.indexOf("Actas/Ubigeo") >= 0) {
+    localStorage.removeItem("mesas");
+    localStorage.removeItem('departaments_provincial');
+    localStorage.removeItem('provinces_provincial');
+    localStorage.removeItem('districts_provincial');
+    localStorage.removeItem('departaments_distrital');
+    localStorage.removeItem('districts_distrital');
+    localStorage.removeItem('provinces_distrital');
+
+    localStorage.removeItem('locals');
+}
+      localStorage.removeItem('departaments_provincial_pres');
+      localStorage.removeItem('provinces_provincial_pres');
+      localStorage.removeItem('districts_provincial_pres');
+      localStorage.removeItem('continents_referendum');
+      localStorage.removeItem('countries_referendum');
+      localStorage.removeItem('states_referendum'); 
+      localStorage.removeItem('orgpol'); 
+      localStorage.removeItem('agrupols'); 
+      localStorage.removeItem('numDeparta');
+      localStorage.removeItem('numProvince');
+      localStorage.removeItem('numDistrit');	
+	    localStorage.removeItem('departaments_provincial_par');
+      localStorage.removeItem('provinces_provincial_par');
+      localStorage.removeItem('districts_provincial_par');
+	    localStorage.removeItem('distrito_electoral'); 	  
+	    localStorage.removeItem('proc-muni');
+      localStorage.removeItem('proc-pre');
+      localStorage.removeItem('proc-par');
+      localStorage.removeItem('proc-del');	
+	    localStorage.removeItem('departaments_distrital_actas');
+      localStorage.removeItem('provinces_distrital_actas');
+      localStorage.removeItem('districts_distrital_actas');
+      localStorage.removeItem('numDepartaActas');
+      localStorage.removeItem('numProvinceActas');
+      localStorage.removeItem('numDistritActas');
+      localStorage.removeItem('province-name');
+      localStorage.removeItem('department-name');
+      localStorage.removeItem('district-name');
+      localStorage.removeItem('proc-del-prov');
+      localStorage.removeItem('proc-del-dis');	
+	    localStorage.removeItem('departaments_consejero');
+      localStorage.removeItem('provinces_consejero');
+      localStorage.removeItem('districts_consejero');	
+	    localStorage.removeItem('departaments_regional');
+	    localStorage.removeItem('agrupolsT');
+      localStorage.removeItem('departaments_distrital');
+      localStorage.removeItem('provinces_distrital');
+      localStorage.removeItem('districts_distrital');             
+      localStorage.removeItem('numContinent');
