@@ -50,8 +50,7 @@ plot_map <- ggplot(
   ) +
   theme_void(20) +
   theme(
-    legend.key.height = unit(2, "line"),
-
+    legend.key.height = unit(2, "line")
   )
 
 tabaus <- partic_peru %>%
