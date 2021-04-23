@@ -60,7 +60,21 @@ p1 <- ggplot(peru_map) +
   geom_sf(aes(fill = as.factor(partido)),
           size = .05,
           color = "black") +
-  scale_fill_brewer(palette = "Paired", type = "qual") +
+  scale_fill_manual(
+    values = c(
+      "#A6CEE3",
+      "#1F78B4",
+      "#B2DF8A",
+      "#33A02C",
+      "#FB9A99",
+      "#E31A1C",
+      "#FDBF6F",
+      "#FF7F00",
+      "#333333",
+      "#999999",
+      "#FFFF99"
+    )
+  ) +
   labs(
     title = "Elección presidencial: Partido con mas votos por distrito",
     subtitle = glue::glue("Perú: Elecciones Generales 2021 - Primera vuelta\nFuente: ONPE (al {upd_ts}, {pct_completion} % de avance)"),
