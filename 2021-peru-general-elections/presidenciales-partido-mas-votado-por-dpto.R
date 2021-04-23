@@ -16,6 +16,7 @@ peru_map <- readRDS("2021-peru-general-elections/gadm36_PER_1_sf.rds") %>%
 partidos_dpto <- readRDS(
   "2021-peru-general-elections/resultados-partidos-dpto.rds"
 )
+
 top1_dpto <- partidos_dpto %>%
   arrange(departamento, partido, desc(votos)) %>%
   group_by(departamento) %>%

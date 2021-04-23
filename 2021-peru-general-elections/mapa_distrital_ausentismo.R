@@ -12,11 +12,28 @@ participacion <- readRDS(url("https://github.com/jmcastagnetto/2021-elecciones-g
     by = c("ubigeo_distrito" = "reniec")
   )
 
+pct_completion <- participacion %>%
+  pull(pct_avance) %>%
+  unique()
+upd_date <- participacion %>% pull(date_upd) %>% unique()
+upd_time <- participacion %>% pull(hour_upd) %>% unique()
+upd_ts <- glue::glue("{upd_date} {upd_time}")
+
 peru_map <- peru %>%
+  mutate(
+    CODIGO = case_when(
+      NOMBPROV == "SAN ROMAN" & NOMBDIST == "SAN MIGUEL" ~ "211105",
+      NOMBPROV == "SATIPO" & NOMBDIST == "MAZAMARI - PANGOA" ~ "120604",
+      TRUE ~ CODIGO
+    )
+  ) %>%
   left_join(
     participacion %>%
+      mutate(
+        pct_total_ausentes = pct_total_ausentes / 100
+      ) %>%
       select(inei, distrito, pct_total_ausentes),
-    by = c("UBIGEO" = "inei")
+    by = c("CODIGO" = "inei")
   )
 
 min_ausentes <- participacion %>%
@@ -38,7 +55,8 @@ p1 <- ggplot(peru_map) +
     low = "#dadaeb",
     high = "#54278f",
     na.value = "white",
-    n.breaks = 10
+    n.breaks = 10,
+    labels = scales::percent_format(accuracy = 1)
   ) +
   annotate(
     geom = "label",
@@ -52,9 +70,9 @@ p1 <- ggplot(peru_map) +
   ) +
   labs(
     title = "Perú: Ausentismo electoral a nivel de distritos",
-    subtitle = "Elecciones Generales 2021. Fuente: ONPE (al 2021-04-16)",
-    caption = "@jmcastagnetto, Jesus M. Castagnetto, 2021-04-16",
-    fill = "% de ausentes"
+    subtitle = glue::glue("Elecciones Generales 2021.\nFuente: ONPE (al {upd_ts}, {pct_completion} % de avance)"),
+    caption = "@jmcastagnetto, Jesus M. Castagnetto, 2021-04-23",
+    fill = "Ausentes"
   ) +
   theme_void() +
   theme(
@@ -65,11 +83,12 @@ p1 <- ggplot(peru_map) +
     plot.caption = element_text(family = "Inconsolata", size = 14),
     legend.key.height = unit(3, "lines"),
     legend.text = element_text(size = 14),
-    legend.title = element_text(face = "bold"),
+    legend.title = element_text(face = "bold", size = 16, hjust = .5),
     legend.position = c(.2, .3)
   )
 
 ggsave(
+  plot = p1,
   filename = "2021-peru-general-elections/mapa_distrital_ausentismo_eegg2021.png",
   width = 10,
   height = 14
