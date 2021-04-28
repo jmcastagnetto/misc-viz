@@ -1,6 +1,5 @@
 library(tidyverse)
 library(vroom)
-library(ggforce)
 
 spec <- cols(
   .default = col_double(),
