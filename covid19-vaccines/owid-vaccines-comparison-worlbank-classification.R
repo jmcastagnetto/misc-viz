@@ -182,6 +182,17 @@ p2 <- ggplot(
     con.type = "straight",
     con.arrow = arrow(length = unit(2, "mm"))
   ) +
+  # ggforce::geom_mark_rect(
+  #   data = vaccinations_country_latest %>%
+  #     filter(iso_code == "PER"),
+  #   aes(group = location,
+  #       label = location,
+  #       description = glue::glue("{people_vaccinated_per_hundred}%")),
+  #   color = "black",
+  #   con.colour = "black",
+  #   con.type = "straight",
+  #   con.arrow = arrow(length = unit(2, "mm"))
+  # ) +
   ggtext::geom_textbox(
     data = txt_note2,
     aes(x = x, y = y, label = txt),
@@ -216,7 +227,7 @@ p2 <- ggplot(
     plot.subtitle = element_text(size = 22, color = "red"),
     plot.caption = element_text(family = "Inconsolata")
   )
-
+#p2
 ggsave(
   plot = p2,
   filename = "covid19-vaccines/covid19-vaccination-vs-gdp.png",
