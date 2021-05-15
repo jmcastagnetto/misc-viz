@@ -4,29 +4,48 @@ library(patchwork)
 
 # Lima Departamento --------------------------------------------------------
 
+participacion <- readRDS(url("https://github.com/jmcastagnetto/2021-elecciones-generales-peru-datos-de-onpe/raw/main/resultados-participacion-por-distrito.rds"))
+
+
 lima_dpto <- readRDS("2021-peru-general-elections/gadm36_PER_2_sf.rds") %>%
   filter(
     NAME_1 %in% c("Lima", "Lima Province")
   )
 
-partic_lima_fn <- "2021-peru-general-elections/Participacion__LIMA_DETALLE_undefined.csv"
 
+# partic_lima_fn <- "2021-peru-general-elections/Participacion__LIMA_DETALLE_undefined.csv"
 
-upd_lbl <- read_lines(
-  file = partic_lima_fn,
-  skip = 5,
-  n_max = 1
-) %>%
-  str_remove_all('"') %>%
-  str_to_sentence()
+upd_lbl <- glue::glue("{unique(participacion$date_upd)} {unique(participacion$hour_upd)}, al {unique(participacion$pct_avance)}% de avance")
 
-lima_ausentismo <- read_csv(
-  partic_lima_fn,
-  skip = 9
-) %>%
-  janitor::clean_names() %>%
-  select(
-    provincia, percent_total_ausentes
+#
+# upd_lbl <- read_lines(
+#   file = partic_lima_fn,
+#   skip = 5,
+#   n_max = 1
+# ) %>%
+#   str_remove_all('"') %>%
+#   str_to_sentence()
+
+# lima_ausentismo <- read_csv(
+#   partic_lima_fn,
+#   skip = 9
+# ) %>%
+#   janitor::clean_names() %>%
+#   select(
+#     provincia, percent_total_ausentes
+#   )
+
+lima_ausentismo <- participacion %>%
+  filter(
+    departamento == "LIMA"
+  ) %>%
+  group_by(provincia) %>%
+  summarise(
+    ausentes = sum(total_ausentes, na.rm = TRUE),
+    habiles = sum(electores_habiles, na.rm = TRUE)
+  ) %>%
+  mutate(
+    pct_total_ausentes = 100 * ausentes / habiles
   )
 
 lima_dpto_df <- lima_dpto %>%
@@ -40,7 +59,7 @@ lima_dpto_df <- lima_dpto %>%
 
 
 lima_map <- ggplot(lima_dpto_df) +
-  geom_sf(aes(fill = percent_total_ausentes),
+  geom_sf(aes(fill = pct_total_ausentes),
           color = "white") +
   scale_fill_steps(
     low = "#56B1F7",
@@ -57,9 +76,10 @@ lima_map <- ggplot(lima_dpto_df) +
   )
 
 tabaus <- lima_ausentismo %>%
-  arrange(percent_total_ausentes) %>%
+  select(provincia, pct_total_ausentes) %>%
+  arrange(pct_total_ausentes) %>%
   mutate(
-    percent_total_ausentes = sprintf("%.1f%%", percent_total_ausentes)
+    pct_total_ausentes = sprintf("%.1f%%", pct_total_ausentes)
   ) %>%
   rename(
     Provincia = 1,
@@ -73,7 +93,7 @@ p_lima <- wrap_elements(gridExtra::tableGrob(tabaus)) + lima_map +
   plot_annotation(
     title = "Lima, Perú: Ausentismo en las Elecciones Generales 2021",
     subtitle = glue::glue("Fuente: ONPE ({upd_lbl})"),
-    caption = "@jmcastagnetto, Jesus M. Castagnetto 2021-05-12"
+    caption = glue::glue("@jmcastagnetto, Jesus M. Castagnetto ({Sys.Date()})")
   ) &
   theme(
     plot.title = element_text(size = 20),
@@ -94,23 +114,33 @@ lima_prov <- readRDS("2021-peru-general-elections/gadm36_PER_3_sf.rds") %>%
     NAME_1 %in% c("Lima Province")
   )
 
-partic_limaprov_fn <- "2021-peru-general-elections/Participacion_LIMA_LIMA_DETALLE_undefined.csv"
+# partic_limaprov_fn <- "2021-peru-general-elections/Participacion_LIMA_LIMA_DETALLE_undefined.csv"
+#
+# upd_lbl <- read_lines(
+#   file = partic_limaprov_fn,
+#   skip = 5,
+#   n_max = 1
+# ) %>%
+#   str_remove_all('"') %>%
+#   str_to_sentence()
+#
+# limaprov_ausentismo <- read_csv(
+#   partic_limaprov_fn,
+#   skip = 9
+# ) %>%
+#   janitor::clean_names() %>%
+#   select(
+#     distrito, percent_total_ausentes
+#   )
 
-upd_lbl <- read_lines(
-  file = partic_limaprov_fn,
-  skip = 5,
-  n_max = 1
-) %>%
-  str_remove_all('"') %>%
-  str_to_sentence()
 
-limaprov_ausentismo <- read_csv(
-  partic_limaprov_fn,
-  skip = 9
-) %>%
-  janitor::clean_names() %>%
+limaprov_ausentismo <- participacion %>%
+  filter(
+    departamento == "LIMA" & provincia == "LIMA"
+  ) %>%
   select(
-    distrito, percent_total_ausentes
+    distrito,
+    pct_total_ausentes
   )
 
 lima_prov_df <- lima_prov %>%
@@ -128,7 +158,7 @@ lima_prov_df <- lima_prov %>%
   )
 
 limaprov_map <- ggplot(lima_prov_df) +
-  geom_sf(aes(fill = percent_total_ausentes),
+  geom_sf(aes(fill = pct_total_ausentes),
           color = "white") +
   scale_fill_steps(
     low = "#56B1F7",
@@ -144,9 +174,9 @@ limaprov_map <- ggplot(lima_prov_df) +
   )
 
 tabaus <- limaprov_ausentismo %>%
-  arrange(percent_total_ausentes) %>%
+  arrange(pct_total_ausentes) %>%
   mutate(
-    percent_total_ausentes = sprintf("%.1f%%", percent_total_ausentes)
+    pct_total_ausentes = sprintf("%.1f%%", pct_total_ausentes)
   ) %>%
   rename(
     Distrito = 1,
