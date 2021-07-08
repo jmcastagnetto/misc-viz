@@ -38,7 +38,7 @@ p1 <- ggraph(df1, layout = "dh") +
 
 p2 <- ggtrack(
   p1,
-  qr_content = "https://github.com/jmcastagnetto/tidytuesday-kludges",
+  qr_content = "https://github.com/jmcastagnetto/misc-viz",
   logo = "common/for-tagline-jmcastagnetto-twitter2.png",
   height_plot = 25,
   height_tracker = 2.5,
