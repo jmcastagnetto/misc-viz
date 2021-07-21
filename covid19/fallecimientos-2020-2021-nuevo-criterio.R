@@ -6,7 +6,7 @@ library(ggtext)
 csv_url <- "https://github.com/jmcastagnetto/covid-19-peru-limpiar-datos-minsa/raw/main/datos/fallecidos_covid-utf8-limpio.csv.xz"
 fn <- tempfile()
 download.file(csv_url, destfile = fn)
-dths <- read_delim(fn, delim = "\t") %>%
+dths <- read_csv(fn) %>%
   mutate(
     yr = epiyear(fecha_fallecimiento),
     wk = epiweek(fecha_fallecimiento),
@@ -23,6 +23,8 @@ plot_df <- dths %>%
     n_ac = cumsum(n)
   )
 
+max_date <- max(dths$fecha_fallecimiento, na.rm = TRUE)
+
 extreme_vals <- plot_df %>%
   group_by(yr) %>%
   summarise(
@@ -38,7 +40,7 @@ extreme_vals <- plot_df %>%
 annotation_df <- tibble(
   x = 22,
   y = 5e4,
-  txt_annotation = glue::glue("En el 2020, entre las semanas {extreme_vals$min_wk[1]} y {extreme_vals$max_wk[1]} se tuvieron {format(extreme_vals$max_n_ac[1], big.mark=',')} fallecidos por COVID-19 a nivel nacional. Entre las semanas {extreme_vals$min_wk[2]} y {extreme_vals$max_wk[2]}, del 2021, ya **hemos acumulado {format(extreme_vals$max_n_ac[2], big.mark=',')} fallecidos por la misma causa**. *No podemos dejar de cuidarnos, pues aún nos queda mucho que recorrer antes que esto termine*.")
+  txt_annotation = glue::glue("En el 2020, entre las semanas {extreme_vals$min_wk[1]} y {extreme_vals$max_wk[1]} se tuvieron {format(extreme_vals$max_n_ac[1], big.mark=',')} fallecidos por COVID-19 a nivel nacional. Entre las semanas {extreme_vals$min_wk[2]} y {extreme_vals$max_wk[2]}, del 2021, ya **hemos acumulado {format(extreme_vals$max_n_ac[2], big.mark=',')} fallecidos por la misma causa**.<br>*No podemos dejar de cuidarnos, y tenemos que esforzarnos en vacunar a todos*.")
 )
 
 
@@ -75,14 +77,16 @@ p1 <- ggplot(
     y = "",
     color = "Año Epidemiológico",
     title = "Fallecimientos acumulados por COVID-19 en Perú",
-    subtitle = "Usando los datos de MINSA con el nuevo criterio de clasificación",
-    caption = "@jmcastagnetto, Jesus M. Castagnetto (2021-06-12)"
+    subtitle = glue::glue("Fuente: MINSA al {max_date} (https://www.datosabiertos.gob.pe/dataset/fallecidos-por-covid-19-ministerio-de-salud-minsa)"),
+    #subtitle = "Usando los datos de MINSA con el nuevo criterio de clasificación",
+    caption = glue::glue("@jmcastagnetto, Jesus M. Castagnetto ({Sys.Date()})")
   ) +
   theme_minimal(16) +
   theme(
+    plot.background = element_rect(fill = "white"),
     plot.title.position = "plot",
     plot.title = element_text(size = 32),
-    plot.subtitle = element_text(size = 24, color = "gray40"),
+    plot.subtitle = element_text(size = 12, color = "gray40"),
     plot.caption = element_text(family = "Inconsolata", size = 14),
     legend.position = c(.2, .8),
     legend.text = element_text(size = 26),
