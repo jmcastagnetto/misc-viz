@@ -13,9 +13,6 @@ dths <- read_csv(fn) %>%
     mt = month(fecha_fallecimiento)
   )
 
-
-
-
 plot_df <- dths %>%
   group_by(yr, wk) %>%
   tally() %>%
@@ -73,7 +70,7 @@ p1 <- ggplot(
     size = 6,
     inherit.aes = FALSE
   ) +
-  scale_y_continuous(labels = scales::comma, limits = c(0, 1e5)) +
+  scale_y_continuous(labels = scales::comma) +
   scale_color_brewer(palette = "Dark2", type = "qual") +
   labs(
     x = "Semanas desde el inicio del registro (para cada año)",
@@ -81,7 +78,6 @@ p1 <- ggplot(
     color = "Año Epidemiológico",
     title = "Fallecimientos acumulados por COVID-19 en Perú",
     subtitle = glue::glue("Fuente: MINSA al {max_date} (https://www.datosabiertos.gob.pe/dataset/fallecidos-por-covid-19-ministerio-de-salud-minsa)"),
-    #subtitle = "Usando los datos de MINSA con el nuevo criterio de clasificación",
     caption = glue::glue("@jmcastagnetto, Jesus M. Castagnetto ({Sys.Date()})")
   ) +
   theme_minimal(16) +
