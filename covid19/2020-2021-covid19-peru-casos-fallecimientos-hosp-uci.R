@@ -133,7 +133,7 @@ pfinal <- pcomb +
 
 ggsave(
   pfinal,
-  filename = "covid19/20210628-covid19-peru-casos-fallecimientos-hosp-uci.png",
+  filename = "covid19/20210807-covid19-peru-casos-fallecimientos-hosp-uci.png",
   width = 14,
   height = 9
 )
