@@ -1,0 +1,60 @@
+---
+output: pdf_document
+classoption: landscape
+header-includes:
+  - \usepackage[Large,bf]{caption}
+---
+
+\captionsetup[table]{labelformat=empty}
+
+
+```{r include=FALSE}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+
+vacnin <- read_csv(
+  here::here("covid19-vaccines", 
+             "vacunas-para-niños-adolescentes.csv")
+) %>% 
+  mutate(
+    fuente = glue::glue("[{fuente}]")
+  ) %>% 
+  rename(
+    "Vacuna o Fabricante" = vacuna,
+    "Rango de edades o Grupo" = rango_edad,
+    "Disponibilidad" = disponibilidad,
+    Fuente = fuente
+  )
+sources <- read_csv(
+  here::here("covid19-vaccines",
+             "vacunas-para-niños-adolescentes-fuentes.csv")
+  ) %>%
+  mutate(
+    fnt = paste0('\\\\textbf{',fuente,'}: \\\\href{',
+                 url, '}{"',title, '", (', fecha,')}')
+  )
+
+```
+
+
+```{r echo=FALSE}
+kbl(
+  vacnin,
+  format = "latex",
+  booktabs = TRUE,
+  caption = "Vacunas COVID-19 disponibles para niños y adolescentes (al 2021-09-18)"
+) %>%
+  footnote(
+    general_title = "",
+    general = "@jmcastagnetto, Jesus M. Castagnetto",
+    symbol_title = "Fuentes",
+    symbol = sources$fnt,
+    escape = FALSE
+  ) %>%
+  kable_styling(
+    full_width = FALSE
+  ) 
+
+```
+

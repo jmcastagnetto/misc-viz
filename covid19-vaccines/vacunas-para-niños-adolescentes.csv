@@ -1,0 +1,19 @@
+vacuna,rango_edad,disponibilidad,fuente
+Pfizer/BioNTech,12+,Uso autorizado en USA y EU,"nyt,eur"
+Pfizer/BioNTech,5-11,En proceso de pedir aprobación,nyt
+Pfizer/BioNTech,2-5,En proceso de pedir aprobación,nyt
+Pfizer/BioNTech,0.5-2,Planeado pedir aprobación en Octubre o Noviembre,nyt
+Moderna,12-17,Pedido de uso por emergencia en curso (FDA) y en uso en Europa,"nyt,eur"
+Moderna,<12,En ensayo clínico,nyt
+Sputnik V,12-17,En ensayo clínico,nyt 
+AstraZeneca/Oxford,6+,En ensayo clínico,nyt 
+Janssen/BILH,niños y adolescentes,En ensayo clínico,nyt 
+ZFSW,niños y adolescentes,En ensayo clínico,nyt 
+Soberana 2,2-18,Uso autorizado en Cuba,nyt
+Soberana 2 + Soberana Plus,niños y adolescentes,En ensayo clínico,nyt 
+Medigen/Dynavax,12-18,En ensayo clínico,nyt 
+Corbevax,niños,En ensayo clínico,nyt 
+Sinopharm,niños y adolescentes,Uso autorizado en China,nyt
+Sinopharm,3+,Uso autorizado en UAE,nyt
+Sinovac/Coronavac,3-17,Uso autorizado en China,toi
+Covaxin,2+,En ensayo clínico,nyt 
