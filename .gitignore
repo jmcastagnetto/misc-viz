@@ -40,3 +40,6 @@ vignettes/*.pdf
 
 # ignore anything in tmp/
 tmp/*
+
+*~
+**/*~
