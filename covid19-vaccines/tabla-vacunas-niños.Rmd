@@ -48,8 +48,8 @@ kbl(
   footnote(
     general_title = "",
     general = "@jmcastagnetto, Jesus M. Castagnetto",
-    symbol_title = "Fuentes",
-    symbol = sources$fnt,
+    alphabet_title = "Fuentes",
+    alphabet = sources$fnt,
     escape = FALSE
   ) %>%
   kable_styling(
