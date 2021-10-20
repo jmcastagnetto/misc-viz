@@ -56,7 +56,7 @@ ggplot(
     y = "",
     title = "De los pacientes hospitalizados por COVID-19\naquellos vacunados llegaron menos a UCI",
     subtitle = "Fuente: Datos abiertos del MINSA",
-    caption = "@jmcastagnetto, Jesus M. Castagnetto (2021-09-05)"
+    caption = glue::glue("@jmcastagnetto, Jesus M. Castagnetto ({Sys.Date()})")
   )
 
 ggsave(

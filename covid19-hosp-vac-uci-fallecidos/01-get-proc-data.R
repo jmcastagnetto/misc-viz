@@ -4,7 +4,7 @@ download.file(
   url = "https://cloud.minsa.gob.pe/s/BosSrQ5wDf86xxg/download",
   destfile = "covid19-hosp-vac-uci-fallecidos/TB_HOSP_VAC_FALLECIDOS.csv"
 )
-R.utils::gzip("covid19-hosp-vac-uci-fallecidos/TB_HOSP_VAC_FALLECIDOS.csv")
+R.utils::gzip("covid19-hosp-vac-uci-fallecidos/TB_HOSP_VAC_FALLECIDOS.csv", overwrite = TRUE)
 
 hvf <- read_csv(
   "covid19-hosp-vac-uci-fallecidos/TB_HOSP_VAC_FALLECIDOS.csv.gz",
@@ -13,7 +13,7 @@ hvf <- read_csv(
     eess_renaes = col_integer(),
     id_eess = col_integer(),
     id_persona = col_integer(),
-    anho_nac = col_integer(),
+    edad = col_integer(),
     con_oxigeno = col_integer(),
     con_ventilacion = col_integer(),
     flag_vacuna = col_integer(),
@@ -32,8 +32,8 @@ hvf <- read_csv(
   )
 ) %>%
   mutate(
-    edad = lubridate::year(Sys.Date()) - anho_nac,
-    edad = if_else(edad < 0, 0, edad),
+    #edad = lubridate::year(Sys.Date()) - anho_nac,
+    #edad = if_else(edad < 0, 0, edad),
     rango_edad = cut(
       edad,
       c(seq(0, 80, 20), 130),
@@ -50,7 +50,7 @@ hvf <- read_csv(
   mutate_at(
     vars(sexo, eess_diresa, eess_red, eess_nombre, evolucion_hosp_ultimo,
          ubigeo_inei_domicilio, dep_domicilio, prov_domicilio, dist_domicilio,
-         fabricante_vacuna
+         fabricante_dosis1, fabricante_dosis2
     ),
     factor
   )

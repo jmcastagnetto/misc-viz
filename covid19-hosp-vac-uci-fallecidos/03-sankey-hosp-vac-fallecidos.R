@@ -1,7 +1,7 @@
 library(tidyverse)
 library(ggsankey)
 
-sankey_df <- read_fst("covid19-hosp-vac-uci-fallecidos/hosp_vac_fallecido.rds") %>%
+sankey_df <- readRDS("covid19-hosp-vac-uci-fallecidos/hosp_vac_fallecido.rds") %>%
   mutate(
     sexo = case_when(
       sexo == "F" ~ "Femenino",
@@ -59,7 +59,7 @@ ggplot(
     y = "",
     title = "De los pacientes hospitalizados por COVID-19\naquellos vacunados fallecieron con menos frecuencia",
     subtitle = "Fuente: Datos abiertos del MINSA",
-    caption = "@jmcastagnetto, Jesus M. Castagnetto (2021-09-05)"
+    caption = glue::glue("@jmcastagnetto, Jesus M. Castagnetto ({Sys.Date()})")
   )
 
 ggsave(
