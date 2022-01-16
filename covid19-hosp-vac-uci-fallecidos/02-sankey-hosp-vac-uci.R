@@ -10,7 +10,7 @@ sankey_df <- readRDS("covid19-hosp-vac-uci-fallecidos/hosp_vac_fallecido.rds") %
     ) %>%
       factor(),
     flag_vacuna = if_else(
-      flag_vacuna %in% 1:2,
+      flag_vacuna %in% 1:3,
       paste0("Dosis: ", flag_vacuna),
       "Sin vacuna") %>%
       factor(),
@@ -54,7 +54,7 @@ ggplot(
   labs(
     x = "",
     y = "",
-    title = "De los pacientes hospitalizados por COVID-19\naquellos vacunados llegaron menos a UCI",
+    title = "De los pacientes hospitalizados por COVID-19, los vacunados\nllegaron proporcionalmente menos a UCI",
     subtitle = "Fuente: Datos abiertos del MINSA",
     caption = glue::glue("@jmcastagnetto, Jesus M. Castagnetto ({Sys.Date()})")
   )
