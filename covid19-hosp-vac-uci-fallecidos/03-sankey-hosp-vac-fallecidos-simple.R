@@ -1,0 +1,60 @@
+library(tidyverse)
+library(ggsankey)
+
+sankey_df <- readRDS("covid19-hosp-vac-uci-fallecidos/hosp_vac_fallecido.rds") %>%
+  mutate(
+    flag_vacuna = if_else(
+      flag_vacuna %in% 1:3,
+      paste0("Dosis: ", flag_vacuna),
+      "Sin vacuna"),
+    cdc_fallecido_covid = if_else(
+      cdc_fallecido_covid,
+      "Fallecido",
+      "No fallecido")
+  ) %>%
+  select(
+    Vacunado = flag_vacuna,
+    Fallecido = cdc_fallecido_covid
+  ) %>%
+  make_long(
+    Vacunado,
+    Fallecido
+  )
+
+ggplot(
+  sankey_df,
+  aes(
+    x = x,
+    next_x = next_x,
+    node = node,
+    next_node = next_node,
+    fill = factor(node),
+    label = node
+  )) +
+  geom_sankey(flow.alpha = .8,
+              node.color = "gray30") +
+  geom_sankey_label(size = 4, fontface = "bold",
+                    color = "white", fill = "gray40",
+                    width = .1)  +
+  scale_fill_brewer(palette = "Paired") +
+  theme_sankey(base_size = 18) +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = .5, size = 24),
+    plot.subtitle = element_text(hjust = .5, color = "grey40"),
+    plot.caption = element_text(family = "Inconsolata", hjust = .5)
+  ) +
+  labs(
+    x = "",
+    y = "",
+    title = "De los pacientes hospitalizados por COVID-19, los vacunados\nfallecieron proporcionalmente con menos frecuencia",
+    subtitle = "Fuente: Datos abiertos del MINSA",
+    caption = glue::glue("@jmcastagnetto, Jesus M. Castagnetto ({Sys.Date()})")
+  )
+
+ggsave(
+  "covid19-hosp-vac-uci-fallecidos/sankey_hosp_vacunados_fallecidos-simple.png",
+  width = 12,
+  height = 10
+)
+
