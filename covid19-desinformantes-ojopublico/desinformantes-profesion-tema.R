@@ -3,7 +3,7 @@ library(tidygraph)
 library(ggraph)
 library(ggtrack)
 
-df <- read_csv("covid19/desinformantes_saludconlupa.csv") %>%
+df <- read_csv("covid19-desinformantes-ojopublico/desinformantes_saludconlupa.csv") %>%
   select(-id, -description, -img, -url) %>%
   separate_rows(
     topics,
@@ -28,7 +28,7 @@ p1 <- ggraph(df1, layout = "dh") +
   scale_color_brewer(palette = "Dark2") +
   labs(
     title = "COVID-19: Relación entre profesión de la persona y tema de desinformación",
-    subtitle = "Fuente: Serie \"Desinformantes\" de @saludconlupa"
+    subtitle = glue::glue("Fuente: Serie \"Desinformantes\" de @saludconlupa // Actualizado el {Sys.Date()}")
   ) +
   theme(
     plot.title = element_text(size = 18),
@@ -49,7 +49,7 @@ p2 <- ggtrack(
 
 ggsave(
   plot = p2,
-  filename = "covid19/desinformantes-profesion-tema.png",
+  filename = "covid19-desinformantes-ojopublico/desinformantes-profesion-tema.png",
   width = 16,
   height = 12
 )

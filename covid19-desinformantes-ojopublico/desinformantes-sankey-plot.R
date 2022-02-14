@@ -3,7 +3,8 @@ library(randomcoloR)
 library(ggsankey)
 library(ggtrack)
 
-plot_df <- read_csv("covid19/desinformantes_saludconlupa.csv") %>%
+csv_file <- "covid19-desinformantes-ojopublico/desinformantes_saludconlupa.csv"
+plot_df <- read_csv(csv_file) %>%
   select(country, profession, topics) %>%
   separate_rows(
     topics,
@@ -32,7 +33,7 @@ p1 <- ggplot(
     size = 4
   ) +
   scale_fill_manual(
-    values = distinctColorPalette(47)
+    values = distinctColorPalette(52)
   ) +
   scale_x_discrete(
     labels = c(
@@ -53,7 +54,7 @@ p1 <- ggplot(
     x = "",
     y = "",
     title = "COVID-19 - \"Desinformantes\": De donde vienen, que hacen y sobre que desinforman",
-    subtitle = "Fuente: Serie \"Desinformantes\" de @saludconlupa"
+    subtitle = glue::glue("Fuente: Serie \"Desinformantes\" de @saludconlupa // Actualizado el: {Sys.Date()}")
   )
 
 p2 <- ggtrack(
@@ -68,7 +69,7 @@ p2 <- ggtrack(
 
 ggsave(
   plot = p2,
-  filename = "covid19/desinformantes-sankey-plot.png",
+  filename = "covid19-desinformantes-ojopublico/desinformantes-sankey-plot.png",
   width = 16,
   height = 16
 )

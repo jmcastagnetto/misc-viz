@@ -7,7 +7,7 @@ library(rvest)
 # documento principal
 base_url <- "https://saludconlupa.com"
 series_url <- paste0(base_url, "/series/desinformantes/")
-doc <- read_html(url)
+doc <- read_html(series_url)
 elements <- html_elements(doc, xpath = "//div[@class='item']")
 info <- html_elements(doc,  xpath = "//div[@class='item-name']/a")
 l1 <- elements %>%
@@ -62,5 +62,5 @@ final_df <- bind_cols(n1, d1) %>%
 
 write_csv(
   final_df,
-  file = "covid19/desinformantes_saludconlupa.csv"
+  file = "covid19-desinformantes-ojopublico/desinformantes_saludconlupa.csv"
 )
