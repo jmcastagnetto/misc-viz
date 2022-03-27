@@ -1,7 +1,6 @@
 library(tidyverse)
 
 sam_df <- readRDS("estimated-r-pone-0244474/data/est_r.rds") %>%
-  filter(date >= "2021-01-01") %>%
   mutate(
     region23 = countrycode::countryname(country_region, destination = "region23")
   ) %>%
@@ -18,15 +17,23 @@ sam_df <- readRDS("estimated-r-pone-0244474/data/est_r.rds") %>%
 today <- Sys.Date()
 min_date <- min(sam_df$date)
 max_date <- max(sam_df$date)
+lower_limit <- as.Date("2022-01-01")
+
 Sys.setlocale("LC_TIME", "es_PE.utf8")
 
 psam <- ggplot(
-  sam_df %>% filter(days_infectious == 10),
+  sam_df %>%
+    filter(days_infectious == 10) %>%
+    filter(date >= lower_limit),
 ) +
   aes(x = date, y = r, color = country_region) +
-  geom_hline(yintercept = 1, color = "grey70") +
-  geom_line(aes(linetype = linetype)) +
-  ggrepel::geom_label_repel(
+  geom_hline(yintercept = 1,
+             color = "grey80",
+             alpha = 0.5,
+             size = 2,
+             linetype = "dashed") +
+  geom_line(size = 1.5) +
+  ggrepel::geom_text_repel(
     data = . %>%
       group_by(country_region) %>%
       summarise(
@@ -35,7 +42,7 @@ psam <- ggplot(
         lbl = paste0(unique(country_region), ": ", round(r, 2))
       ),
     aes(label = lbl),
-    label.size = 0,
+    #label.size = 0,
     direction = "y",
     nudge_x = -10,
     size = 6,
@@ -45,7 +52,7 @@ psam <- ggplot(
     max.overlaps = 15,
     show.legend = FALSE
   ) +
-  ggrepel::geom_label_repel(
+  ggrepel::geom_text_repel(
     data = . %>%
       group_by(country_region) %>%
       summarise(
@@ -54,7 +61,7 @@ psam <- ggplot(
         lbl = paste0(unique(country_region), ": ", round(r, 2))
       ),
     aes(label = lbl),
-    label.size = 0,
+    #label.size = 0,
     direction = "y",
     nudge_x = 10,
     size = 6,
@@ -67,42 +74,38 @@ psam <- ggplot(
   annotate(
     geom = "label",
     x = max_date,
-    y = 1.7,
+    y = 3.5,
     label = max_date,
     label.size = 0,
-    size = 6,
+    size = 9,
     fontface = "bold"
   ) +
   annotate(
     geom = "label",
-    x = min_date,
-    y = 1.7,
-    label = min_date,
+    x = lower_limit,
+    y = 3.5,
+    label = lower_limit,
     label.size = 0,
-    size = 6,
+    size = 9,
     fontface = "bold"
   ) +
-  scale_y_continuous(
-    limits = c(0.2, NA)
-  ) +
   scale_x_date(
-    limits = c(as.Date("2020-12-10"), as.Date("2021-04-15"))
+    date_breaks = "1 month",
+    date_labels = "%b\n%Y",
+    limits = c(lower_limit - 30, max_date + 30)
   ) +
-  scale_linetype_manual(
-    name = "",
-    values = c("above" = "dashed", "below" = "solid")
-  ) +
-  hrbrthemes::theme_ipsum_pub(
-    base_size = 20,
-    axis_text_size = 18,
-    axis_title_size = 20,
-    subtitle_size = 24,
-    plot_title_size = 32,
-    caption_family = "Inconsolata",
-    caption_size = 18
-  ) +
+  scale_color_brewer(type = "qual", palette = "Set3") +
+  # scale_linetype_manual(
+  #   name = "",
+  #   values = c("above" = "dotted", "below" = "solid")
+  # ) +
+  ggdark::dark_theme_classic(20) +
   theme(
-    plot.subtitle = element_text(color = "grey50")
+    axis.text = element_text(color = "white", size = 18),
+    plot.title = element_text(color = "white", size = 32),
+    plot.subtitle = element_text(color = "white", size = 24),
+    #plot.background = element_rect(fill = "grey20"),
+    plot.caption = element_text(family = "Inconsolata", size = 18)
   ) +
   guides(
     color = guide_none(),
@@ -112,14 +115,14 @@ psam <- ggplot(
     x = "",
     y = "",
     title = "Evolución del R efectivo estimado (COVID-19) en Sudamérica",
-    subtitle = glue::glue("Del 2021-01-01 al {max_date} (Ref: https://doi.org/10.1371/journal.pone.0244474)"),
-    caption = glue::glue("Fuente original de datos: https://github.com/crondonm/TrackingR/tree/main/Estimates-Database\nCódigo: https://github.com/jmcastagnetto/misc-viz/tree/main/estimated-r-pone-0244474 // @jmcastagnetto, Jesus M. Castagnetto ({today})")
+    subtitle = glue::glue("Del {lower_limit} al {max_date} (Ref: https://doi.org/10.1371/journal.pone.0244474)"),
+    caption = glue::glue("Fuente original de datos: https://github.com/crondonm/TrackingR/tree/main/Estimates-Database\nCódigo: https://github.com/jmcastagnetto/misc-viz/tree/main/estimated-r-pone-0244474\n@jmcastagnetto, Jesus M. Castagnetto ({today})")
   )
 
 ggsave(
   plot = psam,
-  filename = glue::glue("estimated-r-pone-0244474/sudamerica_r-efectivo-estimado-covid19-{min_date}_{max_date}.png"),
-  width = 18,
-  height = 12
+  filename = glue::glue("estimated-r-pone-0244474/sudamerica_r-efectivo-estimado-covid19-{lower_limit}_{max_date}.png"),
+  width = 22,
+  height = 18
 )
 

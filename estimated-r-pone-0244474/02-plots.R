@@ -1,10 +1,12 @@
 library(tidyverse)
 # get estimated R since Sep 2020
-est_r <- readRDS("estimated-r-pone-0244474/data/est_r.rds") %>%
-  filter(date >= "2020-09-01")
+est_r <- readRDS("estimated-r-pone-0244474/data/est_r.rds")
+  # %>% filter(date >= "2020-09-01")
 today <- Sys.Date()
 
 plots_df <- est_r %>%
+  # remove entries w/o ISO 3-letter code, eg: "Summer Olympics 2020"
+  filter(!is.na(iso3c)) %>%
   mutate(
     lbls = glue::glue("Days Infectious: {days_infectious}"),
     lbls = fct_reorder(lbls, days_infectious)
@@ -37,7 +39,7 @@ plots_df <- est_r %>%
           ) +
           facet_wrap(~lbls) +
           scale_x_date(
-            date_breaks = "1 month",
+            date_breaks = "3 months",
             date_labels = "%b\n%Y"
           ) +
           ggthemes::theme_few(base_family = "Roboto") +
