@@ -1,10 +1,10 @@
 library(tidyverse)
 
-monkey_pox_cases <- read_csv(
+monkeypox_cases <- read_csv(
   file = "https://github.com/globaldothealth/monkeypox/raw/main/latest.csv",
   col_types = cols(
     .default = col_character(),
-    ID = col_integer(),
+    ID = col_character(),
     Date_onset = col_date(format = ""),
     Date_confirmation = col_date(format = ""),
     Date_hospitalisation = col_date(format = ""),
@@ -15,6 +15,6 @@ monkey_pox_cases <- read_csv(
 )
 
 saveRDS(
-  monkey_pox_cases,
+  monkeypox_cases,
   file = glue::glue("2022-monkey-pox-map/{Sys.Date()}-monkey-pox-cases.rds")
 )
