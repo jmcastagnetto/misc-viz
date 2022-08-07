@@ -62,8 +62,7 @@ p_peru <- ggplot(peru_map_df) +
     legend.key.height = unit(2, "cm"),
     legend.text = element_text(size = 14),
     legend.title = element_text(size = 16, face = "bold"),
-    legend.title.align = 0.5,
-    plot.margin = unit(c(0, 50, 0, 0), "pt")
+    legend.title.align = 0.5
   ) +
   labs(
     fill = "Casos\n(Provincia)",
@@ -119,13 +118,14 @@ p_lima <- ggplot(lima_map_df) +
     legend.key.height = unit(2, "cm"),
     legend.text = element_text(size = 14),
     legend.title = element_text(size = 16, face = "bold"),
-    legend.title.align = 0.5,
-    plot.margin = unit(c(0, 0, 0, 50), "pt")
+    legend.title.align = 0.5
   ) +
   labs(
     fill = "Casos",
     subtitle = "Provincia de Lima"
   )
+
+# Combinar los mapas
 
 p_combined <- (p_peru + p_lima) +
   plot_annotation(
@@ -145,6 +145,6 @@ p_combined <- (p_peru + p_lima) +
 ggsave(
   plot = p_combined,
   filename = "2022-monkey-pox-map/20220807-mapas-monkeypox-casos-peru.png",
-  width = 16,
-  height = 9
+  width = 14,
+  height = 10
 )
