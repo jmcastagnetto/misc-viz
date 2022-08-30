@@ -1,1 +1,2 @@
 str(iris)
+head(iris)
