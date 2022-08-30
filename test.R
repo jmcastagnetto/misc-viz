@@ -1,2 +1,2 @@
 str(iris)
-head(iris)
+# no need for that
