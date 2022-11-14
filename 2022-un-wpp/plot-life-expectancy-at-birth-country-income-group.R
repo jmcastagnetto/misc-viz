@@ -97,7 +97,7 @@ plot_byincome_life_expect_yr <- ggplot(
 
 ggsave(
   plot = plot_byincome_life_expect_yr,
-  filename = "2022-un-wpp/life-expentancy-at-birth-by-income-group.png",
+  filename = "2022-un-wpp/life-expectancy-at-birth-by-income-group.png",
   width = 18,
   height = 10
 )
