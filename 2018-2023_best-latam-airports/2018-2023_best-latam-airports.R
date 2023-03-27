@@ -65,7 +65,7 @@ latam_airports_plot <- ggplot(
   labs(
     x = "",
     y = "",
-    title = "Airports in Latin America in the \"World's Top 100 airports\"",
+    title = "Airports in Latin America in the \"World's Top 100 Airports\"",
     subtitle = "Data source: SKYTRAX World Airport Awards 2018-2023",
     caption = "@jmcastagnetto@mastodon.social, Jesus M. Castagnetto"
   ) +
