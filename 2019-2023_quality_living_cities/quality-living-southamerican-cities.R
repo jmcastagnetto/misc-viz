@@ -95,7 +95,7 @@ qol_plot <- ggplot(
   ggrepel::geom_text_repel(
     data = sam_complete %>% filter(year == min(year)),
     aes(x = year - .1, label = city),
-    size = 5,
+    size = 6,
     hjust = 1,
     nudge_x = -.5,
     direction = "y"
@@ -103,7 +103,7 @@ qol_plot <- ggplot(
   ggrepel::geom_text_repel(
     data = sam_complete %>% filter(year == max(year)),
     aes(x = year - .1, label = city),
-    size = 5,
+    size = 6,
     hjust = 0,
     nudge_x = .5,
     direction = "y"
@@ -139,7 +139,7 @@ qol_plot <- ggplot(
 ggsave(
   plot = qol_plot,
   filename = "2019-2023_quality_living_cities/quality-living-southamerican-cities.png",
-  height = 14,
-  width = 11
+  height = 13,
+  width = 13
 )
 
